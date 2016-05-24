@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header container">
+  <ol class="breadcrumb">
+    <li><a href="/">Root</a></li>
+    {% if parent_category %}
+    <li><a href="/{{parent_category.category_id}}">{{parent_category.name}}</a></li>
+    {% endif %}
+    <li class="active" data-id="{{category.category_id}}">{{category.name}}</li>
+  </ol>
+</div>
+
+<form class="b-form form-horizontal container" role="form">
+
+  <div class="col-xs-4">
+
+    <div class="b-images">
+      <div class="b-label">
+        Images
+      </div>
+      {% for element in images_validators %}
+      <div class="form-group">
+        <label class="control-label col-xs-8">{{element['text']}}</label>
+        <div class="col-xs-3">
+          <input type="text" class="form-control b-input-float" name="{{element['name']}}" value="{{category.get_scores().get(element['name'], '')}}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="b-negative">
+      <div class="b-label">
+        Negative
+      </div>
+      {% for element in negative_validators %}
+      <div class="form-group">
+        <label class="control-label col-xs-8">{{element['text']}}</label>
+        <div class="col-xs-3">
+          <input type="text" class="form-control b-input-float" name="{{element['name']}}" value="{{category.get_scores().get(element['name'], '')}}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+
+    <div class="b-content">
+      <div class="b-label">
+        Content
+      </div>
+      {% for element in content_validators %}
+      <div class="form-group">
+        <label class="control-label col-xs-8">{{element['text']}}</label>
+        <div class="col-xs-3">
+          <input type="text" class="form-control b-input-float" name="{{element['name']}}" value="{{category.get_scores().get(element['name'], '')}}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="b-category">
+      <div class="b-label">
+        Category
+      </div>
+      {% for element in category_validators %}
+      <div class="form-group">
+        <label class="control-label col-xs-8">{{element['text']}}</label>
+        <div class="col-xs-3">
+          <input type="text" class="form-control b-input-float" name="{{element['name']}}" value="{{category.get_scores().get(element['name'], '')}}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <div class="b-characteristics">
+      <div class="b-label">
+        Characteristics
+      </div>
+      <div class="form-group">
+        <div class="b-upc">
+          <label class="control-label col-xs-8">Correct UPC format</label>
+          <div class="col-xs-3">
+            <input disabled type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="b-tech-info">
+        <div class="form-group">
+          <div class="col-xs-offset-1 col-xs-7">
+            <input disabled type="text" class="form-control" placeholder="Name">
+          </div>
+          <div class="col-xs-3">
+            <input disabled type="text" class="form-control" placeholder="Score">
+          </div>
+          <span class="glyphicon glyphicon-remove" style="padding-top: 9px; color: rgba(0, 0, 0, 0.5);" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="b-tech-info__btn form-group">
+        <div class="col-xs-offset-1 col-xs-10 b-characteristics__btn btn btn-default disabled">
+          Add technical info
+        </div>
+      </div>
+    </div>
+
+    <div class="b-submit col-xs-offset-3 col-xs-7 btn btn-lg btn-default">Submit</div>
+
+    <div class="b-alert alert alert-success col-xs-12">
+      Successfully updated.
+    </div>
+  </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header container">
+  <ol class="breadcrumb">
+    <li><a href="/">Root</a></li>
+    <li class="active">{{category.name}}</li>
+  </ol>
+</div>
+
+<div class="b-select container">
+  <div class="col-xs-offset-3">
+  <h2>Select subcategory:</h2>
+  <br>
+  <form role="form">
+    <div class="form-group col-xs-6">
+      <select class="b-select__form form-control" id="sel1">
+        {% for subcategory in children %}
+        <option value="/{{category.category_id}}/{{subcategory.category_id}}">{{ subcategory.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+        <div class="b-select__btn btn btn-default">Submit</div>
+    </div>
+  </form>
+</div>
+</div>
+
+{% endblock %}
